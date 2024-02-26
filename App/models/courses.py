@@ -8,12 +8,12 @@ class Courses(db.Model):
     type = db.Column(db.Integer) #encodes course type to a numeric value
                                  #0 - Lecture, 1 - Lab, 2 - Tutorial
 
-class Lecture(Courses)
+class Lecture(Courses):
     credits = db.Column(db.Float, default = 1)
 
-class Lab(Courses)
+class Lab(Courses):
     credits = db.Column(db.Float, default = 0.5)
 
-class Tutorial(Courses)
+class Tutorial(Courses):
     credits = db.Column(db.Float, default = 1)
     
