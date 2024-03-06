@@ -15,17 +15,17 @@ class Staff(db.Model):
     qualifications = db.Column(db.String(240), nullable=False)
 
 class Instructor (Staff):
-    hoursWorked = db.Column(db.Integer, nullable = False)
+    hoursWorked = db.Column(db.Integer, nullable = True)
 
 class Lecturer (Staff):
-    hoursWorked = db.Column(db.Integer, nullable = False)
+    hoursWorked = db.Column(db.Integer, nullable = True)
 
 class Marker (Staff):
-    scriptsMarked = db.Column(db.Integer, nullable = False)
+    scriptsMarked = db.Column(db.Integer, nullable = True)
 
 class Tutor (Staff):
-    hoursWorked = db.Column(db.Integer, nullable = False)
+    hoursWorked = db.Column(db.Integer, nullable = True)
 
 class TA (Staff):
-    hoursWorked = db.Column(db.Integer, nullable = False)
+    hoursWorked = db.Column(db.Integer, nullable = True)
 
