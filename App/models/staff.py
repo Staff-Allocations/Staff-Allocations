@@ -13,3 +13,19 @@ class Staff(db.Model):
     amountPaid = db.Column(db.Integer, nullable = False)
     coursesAssigned = db.Column(db.String(240), nullable=False)
     qualifications = db.Column(db.String(240), nullable=False)
+
+class Instructor (Staff):
+    hoursWorked = db.Column(db.Integer, nullable = False)
+
+class Lecturer (Staff):
+    hoursWorked = db.Column(db.Integer, nullable = False)
+
+class Marker (Staff):
+    scriptsMarked = db.Column(db.Integer, nullable = False)
+
+class Tutor (Staff):
+    hoursWorked = db.Column(db.Integer, nullable = False)
+
+class TA (Staff):
+    hoursWorked = db.Column(db.Integer, nullable = False)
+
