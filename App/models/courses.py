@@ -9,8 +9,21 @@ class Courses(db.Model):
     currStudents = db.Column(db.Integer, nullable = True)
     capacity = db.Column(db.Integer, nullable = True)
     numAssessments = db.Column(db.Integer, nullable = True)
-    totalCost = db.Column(db.Integer, nullable = True)  
+    totalCost = db.Column(db.Integer, nullable = True)
 
+    def getStudents(): 
+        #return currStudents; 
+    def getStaff(): 
+
+    def addStaff():
+
+    def createCourse():
+
+    def getNumAssessment():
+
+    def numMarkersRequired():
+
+    def getTotalCost():
 
     
 class Session(db.Model):
