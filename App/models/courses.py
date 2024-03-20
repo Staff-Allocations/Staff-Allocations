@@ -8,8 +8,8 @@ class Courses(db.Model):
     staffAssigned = db.Column(db.Integer, nullable = True) #Who's currently assigned to the course
     currStudents = db.Column(db.Integer, nullable = True)
     capacity = db.Column(db.Integer, nullable = True)
-    numAssessments = = db.Column(db.Integer, nullable = True)
-    totalCost = = db.Column(db.Integer, nullable = True)  
+    numAssessments = db.Column(db.Integer, nullable = True)
+    totalCost = db.Column(db.Integer, nullable = True)  
 
 
     
