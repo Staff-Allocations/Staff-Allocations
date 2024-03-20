@@ -89,3 +89,10 @@ class TA (Staff):
   hoursWorked = db.Column(db.Integer, nullable = True)
 
   def checkHoursWorked():  
+
+class PayRate(db.Model): 
+  payRate = db.Column(db.Float)
+
+  def getPay():
+
+  def updatePay(): 
