@@ -14,7 +14,7 @@ class Courses(db.Model):
 
     
 class Session(db.Model):
-    course_id = db.Column(
+    course_id = db.Column(db.String(120), db.ForeignKey(Courses.course_id)) 
     type = db.Column(db.Integer) 
     numCredits = db.Column(db.Float, nullable = False) 
     numHours = db.Column(db.Float, nullable = False) 
