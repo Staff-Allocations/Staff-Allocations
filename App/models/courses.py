@@ -5,7 +5,7 @@ class Courses(db.Model):
     course_name = db.Column(db.String(120), nullable=False, unique=True)
     sem_offered = db.Column(db.Integer)
     type = db.Column(db.Integer) #encodes course type to a numeric value: 1 - Lab, 2 - Tutorial
-    staffAssigned = db.Column(db.Integer, nullable = True, db.ForeignKey ('Staff.id') #Who's currently assigned to the course
+    staffAssigned = db.Column(db.Integer, nullable = True, db.ForeignKey ('Staff.id')) #Who's currently assigned to the course
     currStudents = db.Column(db.Integer, nullable = True)
     capacity = db.Column(db.Integer, nullable = True)
     numAssessments = db.Column(db.Integer, nullable = True)
