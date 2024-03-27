@@ -10,7 +10,7 @@ def create_Course(course_id, course_name, sem_offered, type, staffAssigned, curr
     db.session.commit()
     return newCourse
   
-def get_user(course_id):
+def get_course(course_id):
     course = Courses.query.filter_by(course_id = course_id).first
     if (course):
         return course
@@ -18,3 +18,38 @@ def get_user(course_id):
 
 def get_all_Courses():
   return Courses.query.all()
+
+def get_Students(course_id):
+    course = Courses.query.filter_by(course_id = course_id).first
+    if (course):
+        return course.currStudents
+    return None
+
+def get_Staff(course_id):
+    course = Courses.query.filter_by(course_id = course_id).first
+    if (course):
+        return course.staffAssigned
+    return None
+'''
+def add_Staff(course_id, staff_id)
+    course = Courses.query.filter_by(course_id = course_id).first
+    if (course):
+        staffAssigned = staffAssigned 
+        return course.staffAssigned
+    return None
+'''
+def get_NumAssessment(course_id):
+    course = Courses.query.filter_by(course_id = course_id).first
+    if (course):
+        return course.numAssessments
+    return None
+
+def get_totalCost(course_id):
+    course = Courses.query.filter_by(course_id = course_id).first
+    if (course):
+        return course.totalCost
+    return None
+
+
+
+    
