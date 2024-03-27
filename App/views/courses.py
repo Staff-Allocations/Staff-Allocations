@@ -2,4 +2,4 @@ from flask import Blueprint, render_template, jsonify, request, send_from_direct
 
 from App.controllers import (get_courses)
 
-courses_views = Blueprint('courses_views', __name__, template_folder='../templates')
+course_views = Blueprint('courses_views', __name__, template_folder='../templates')
