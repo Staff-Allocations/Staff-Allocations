@@ -1,4 +1,4 @@
-from App.models import Users
+from App.models import Users, Courses
 from App.database import db
 from App.config import config
 import requests
@@ -10,11 +10,21 @@ def create_User(id, firstname, lastname, othername, email, level, type, amountPa
     db.session.commit()
     return newUser
   
-def get_user(firstname):
-    user = Users.query.filter_by(firstname = firstname).first
+def get_user(id):
+    user = Users.query.filter_by(id = id).first
     if (user):
         return user
     return None
 
 def get_all_users():
   return Users.query.all()
+
+def view_courses_assigned(id):
+    user = get_user(id)
+    if (user):
+        return Courses.filter_by(staff_id = id)
+    return None
+    
+        
+    
+    
