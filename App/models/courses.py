@@ -11,7 +11,19 @@ class Courses(db.Model):
     numAssessments = db.Column(db.Integer, nullable = True)
     totalCost = db.Column(db.Integer, nullable = True)
 
-    #def numMarkersRequired():
+    def getStudens(): 
+
+    def getStaff():
+
+    def addStaff(): 
+
+    def createCourse(): 
+
+    def getNumAssessments(): 
+
+    def numMarkersRequired(): 
+
+    def getTotalCost():
 
     
 class Session(db.Model):
