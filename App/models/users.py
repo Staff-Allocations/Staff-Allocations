@@ -3,54 +3,52 @@ from App.database import db
 
 class Users(db.Model):
   id = db.Column(db.Integer, primary_key = True) 
-  firstName = db.Column(db.String(120), nullable = False) 
-  lastName = db.Column(db.String(120), nullable = False) 
-  otherName = db.Column(db.String(120), nullable = True) 
   email = db.Column(db.String(120), nullable = False, unique = True) 
-  level = db.Column(db.Integer) #1- MSc, 2- PhD, etc --determine scale 
   type = db.Column(db.Integer) #1- admin , 2- teachingstaff 3- teachingsupport, 4- adminassistant
-  amountPaid = db.Column(db.Float, nullable = False) 
-
+ 
 class TeachingStaff(db.Model): 
-  staff_id = db.Column(db.Integer, primary_key = True) 
-  role = db.Column(db.String(120) ) 
-  qualifications = db.Column(db.String(120)) #areas they specialise in
-  coursesAssigned = db.Column(db.String(120)) 
-
+  firstName = db.Column(db.String(120))
+  lastName =db.Column(db.String(120)) 
+  #level = db.Column(db.EmployementLevel) 
+  
   def viewCoursesAssigned(): 
 
   def recommendMarker(): 
 
- #def checkHoursWorked():
   
 class TeachingSupport(db.Model):
-  staff_id = db.Column(db.Integer, primary_key= True)
-  role = db.Column(db.String(120)) 
-  qualifications = db.Column(db.String(120)) #areas they specialise in
-  coursesAssigned = db.Column(db.String(120)) 
-
+  firstName = db.Column(db.String(120))
+  lastName =db.Column(db.String(120)) 
+  #level = db.Column(db.EmployementLevel) 
+  
   def viewCoursesAssigned(): 
 
 class Admin(db.Model): 
-  id = db.Column(db.Integer, primary_key = True)
-  name = db.Column(db.String(120)) 
+  userID = db.Column(db.Integer, db.ForeignKey('Users.id'))
 
+  def addAllocations():
+
+  def reviewAllocations():
+
+  def viewHistorical(): 
+    
   def addStaffProfile(): 
 
-  def editStaff(): 
+  def updateStaff(): 
 
   def confirmStaff():
 
+  def addCourse(): 
+    
   def updateCourses():
-
-  def reviewAllAllocations():
 
   def viewBudget():
 
-class AdminAssistand(db.Model): 
-  id = db.Column(db.Integer, primary_key = True)
-  name = db.Column(db.String(120)) 
+  def projectedBudget(): 
 
+class AdminAssistand(db.Model): 
+  userID = db.Column(db.Integer, db.ForeignKey('Users.id'))
+  
   def addAllocations():
 
   def reviewAllAllocations(): 
