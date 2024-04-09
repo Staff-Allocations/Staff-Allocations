@@ -6,7 +6,7 @@ index_views = Blueprint('index_views', __name__, template_folder='../templates')
 
 @index_views.route('/', methods=['GET'])
 def index_page():
-    courses = get_all_courses
+    courses = get_all_courses()
     return render_template('index.html', courses=courses)
 
 @index_views.route('/init', methods=['GET'])
