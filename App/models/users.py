@@ -7,7 +7,7 @@ class Users(db.Model):
   type = db.Column(db.Integer) #1- admin , 2- teachingstaff 3- teachingsupport, 4- adminassistant
  
 class TeachingStaff(db.Model):
-  id = db.Column(db.Integer, db.ForeignKey('Users.id'), primary_key=True)
+  id = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
   firstName = db.Column(db.String(120))
   lastName =db.Column(db.String(120)) 
   #level = db.Column(db.EmployementLevel) 
@@ -18,7 +18,7 @@ class TeachingStaff(db.Model):
 
   
 class TeachingSupport(db.Model):
-  id = db.Column(db.Integer, db.ForeignKey('Users.id'), primary_key=True)
+  id = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
   firstName = db.Column(db.String(120))
   lastName =db.Column(db.String(120)) 
   #level = db.Column(db.EmployementLevel) 
@@ -26,8 +26,7 @@ class TeachingSupport(db.Model):
   # def viewCoursesAssigned(): 
 
 class Admin(db.Model): 
-  id = db.Column(db.Integer, db.ForeignKey('Users.id'), primary_key=True)
-  userID = db.Column(db.Integer, db.ForeignKey('Users.id'))
+  userID = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
 
   # def addAllocations():
 
@@ -50,8 +49,7 @@ class Admin(db.Model):
   # def projectedBudget(): 
 
 class AdminAssistant(db.Model):
-  id = db.Column(db.Integer, db.ForeignKey('Users.id'), primary_key=True)
-  userID = db.Column(db.Integer, db.ForeignKey('Users.id'))
+  userID = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
   
   # def addAllocations():
 
