@@ -16,7 +16,7 @@ def get_course(course_id):
         return course
     return None
 
-def get_all_Courses():
+def get_all_courses():
   return Courses.query.all()
 
 def get_Students(course_id):
