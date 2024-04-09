@@ -24,17 +24,14 @@ def identify_page():
     return render_template('message.html', title="Identify", message=f"You are logged in as {current_user.id} - {current_user.username}")
     
 
-@auth_views.route('/login', methods=['POST'])
+@auth_views.route('/login', methods=['POST', 'GET'])
 def login_action():
     data = request.form
-    token = login(data['username'], data['password'])
-    response = redirect(request.referrer)
-    if not token:
-        flash('Bad username or password given'), 401
-    else:
-        flash('Login Successful')
-        set_access_cookies(response, token) 
-    return response
+    user = login(data['username'], data['password'])
+    if user:
+        login_user(user)
+        return 'user logged in!'
+    return 'bad username or password given', 401
 
 @auth_views.route('/logout', methods=['GET'])
 def logout_action():
