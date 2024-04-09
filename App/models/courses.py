@@ -8,7 +8,7 @@ class Courses(db.Model):
     staffAssigned = db.Column(db.Integer, nullable = True, db.ForeignKey ('Staff.id')) #Who's currently assigned to the course
     currStudents = db.Column(db.Integer, nullable = True)
     capacity = db.Column(db.Integer, nullable = True)
-    numAssessments = db.Column(db.Integer, nullable = True)
+    numAssessments = db.Column(db.Integer, nullable = False)
     totalCost = db.Column(db.Integer, nullable = True)
 
     def getStudens(): 
