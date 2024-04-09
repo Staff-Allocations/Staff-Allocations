@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block title %}Add Staff Member{% endblock %}
+
+{% block page %}Add Staff Member{% endblock %}
+
+
+{% block content %}
+
+<style>
+  ::placeholder {
+    color: rgba(0, 0, 0, 0.555);
+  }
+</style>
+
+<div>
+  <div>
+    <form id="addStaffForm" method="POST" action="/addStaff" style= "border-radius: 25px; border: 2px solid #000000; padding: 155px;">
+      <div class="row">
+        <div class="input-field col s12">
+          <input placeholder="StaffID" id="StaffID" name="staffID" type="text" class="validate" style= "color:#000000; border-radius: 35px; height: 25px; border: 2px solid #6d6d6d62; padding: 9px;">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input placeholder="Email Address" name="email" id="email" type="text" class="validate" style= "color:#000000; border-radius: 35px; height: 25px; border: 2px solid #6d6d6d62; padding: 9px;">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12"> 
+        <!-- change this to a dropdown -->
+          <input placeholder="Type (1 for admin, 2 for Teaching staff, 3 for Teaching assistant, 4 for admin assistant)" name="type" id="type" type="text" class="validate" style= "color:#000000; border-radius: 35px; height: 25px; border: 2px solid #6d6d6d62; padding: 9px;">
+        </div>
+      </div>
+
+      <!-- <div class="row">
+        <div class="input-field col s12">
+          <input placeholder="Type: 1 for Lab, 2 for Tutorial" name="type" id="type" type="text" class="validate" style= "color:#000000; border-radius: 35px; height: 25px; border: 2px solid #6d6d6d62; padding: 9px;">
+        </div> -->
+      </div>
+      <div class="row justify-content">
+        <div class="col s4 card-action">
+          <input type="submit" class="btn btn-secondary" value="Add Staff" style = "border-radius: 12px;">
+        </div>
+
+        <div class="col s8 card-action right-align">
+      
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+</div>
+{% endblock %}
