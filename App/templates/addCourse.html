@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block title %}Add Course{% endblock %}
+
+{% block page %}Add Course{% endblock %}
+
+
+{% block content %}
+
+<style>
+  ::placeholder {
+    color: rgba(0, 0, 0, 0.555);
+  }
+</style>
+
+<div>
+  <div>
+    <form id="addCourseForm" method="POST" action="/addCourse" style= "border-radius: 25px; border: 2px solid #000000; padding: 155px;">
+      <div class="row">
+        <div class="input-field col s12">
+          <input placeholder="CourseID" id="courseID" name="courseID" type="text" class="validate" style= "color:#000000; border-radius: 35px; height: 25px; border: 2px solid #6d6d6d62; padding: 9px;">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input placeholder="Course Name" name="courseName" id="courseName" type="text" class="validate" style= "color:#000000; border-radius: 35px; height: 25px; border: 2px solid #6d6d6d62; padding: 9px;">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input placeholder="Semester Offered (1, 2 or 3)" name="semOffered" id="semOffered" type="text" class="validate" style= "color:#000000; border-radius: 35px; height: 25px; border: 2px solid #6d6d6d62; padding: 9px;">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input placeholder="Type: 1 for Lab, 2 for Tutorial" name="type" id="type" type="text" class="validate" style= "color:#000000; border-radius: 35px; height: 25px; border: 2px solid #6d6d6d62; padding: 9px;">
+        </div>
+      </div>
+      <div class="row justify-content">
+        <div class="col s4 card-action">
+          <input type="submit" class="btn btn-secondary" value="Add Course" style = "border-radius: 12px;">
+        </div>
+
+        <div class="col s8 card-action right-align">
+      
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+</div>
+{% endblock %}
