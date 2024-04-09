@@ -14,6 +14,9 @@
       width: 100%;
       border: 2px solid;
     }
+    .inlineTable {
+            display: inline-block;
+        }
   </style>
 
   <h1>Dashboard</h1>
@@ -31,10 +34,21 @@
           </tr>
           {% endfor %}
     </table>
+    <!-- <table class = "inlineTable">
+      <tr>
+        <td>Course</td>
+        <td>Staff Member</td>
+        <td>Role</td>
+      </tr>
+    </table> -->
       
     <form class="col-md-4 col-lg-offset-4" method="POST" action="/addCourseDetails">
-      <button class="btn waves-effect waves-light"" type="submit" name="action">Add Course</button>
-    </form>   
+      <button class="btn waves-effect waves-light" type="submit" name="action">Add Course</button>
+    </form>  
+
+    <form class="col-md-4 col-lg-offset-4" method="POST" action="/addStaffDetails">
+      <button class="btn waves-effect waves-light" type="submit" name="action">Add Staff Member</button>
+    </form>
     
     
 {% endblock %}
