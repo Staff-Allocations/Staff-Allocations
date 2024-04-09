@@ -1,12 +1,13 @@
 from flask import Blueprint, redirect, render_template, request, send_from_directory, jsonify
 from App.models import db
-from App.controllers import create_user
+from App.controllers import (create_user, get_all_courses)
 
 index_views = Blueprint('index_views', __name__, template_folder='../templates')
 
 @index_views.route('/', methods=['GET'])
 def index_page():
-    return render_template('index.html')
+    courses = get_all_courses
+    return render_template('index.html', courses=courses)
 
 @index_views.route('/init', methods=['GET'])
 def init():
