@@ -1,6 +1,6 @@
 from App.database import db
 
-class EmployemnetLevel(db.Model):
+class EmploymnetLevel(db.Model):
   levelName = db.Column(db.String(120))
   payRate = db.Column(db.Float) 
   period = db.Column(db.Integer) 
