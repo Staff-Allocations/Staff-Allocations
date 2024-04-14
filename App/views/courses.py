@@ -21,10 +21,11 @@ def add_course():
     type = data['type']
     capacity = data['capacity']
     numAssessments = data['numAssessments']
+    numStreams = data['numStreams']
     staffAssigned=0      #add an advanced toggle to input these
     currStudents=0
     totalCost=0
-    course = create_course(course_id, course_name, sem_offered, type, staffAssigned, currStudents, capacity, numAssessments, totalCost)
+    course = create_course(course_id, course_name, sem_offered, type, staffAssigned, currStudents, capacity, numAssessments, totalCost, numStreams)
     if course:
         courses = get_all_courses()
         return redirect('/')
