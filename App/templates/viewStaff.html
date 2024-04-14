@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block title %}Staff{% endblock %}
+{% block page %}Staff{% endblock %}
+{{ super() }}
+
+{% block content %}
+    <table style="width:100%">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email Address</th>
+            <th>Status</th>
+            <th>Type</th>
+            <th>Assigned Courses</th>
+            <th>Qualifications</th>
+        </tr>
+        {% for staff in staff %}
+        <tr>
+            <td>{{staff.id}}</td>
+            <td>{{staff.firstName}} {{staff.lastName}}</td>
+            <td>{{staff.email}}</td>
+            <td>fix this</td>
+            <td>Teaching Staff</td>
+            <td>fix this</td>
+            <td>{{staff.courses}}</td>  
+        </tr>
+        {% endfor %}
+        
+    </table>
+
+{% endblock %}
