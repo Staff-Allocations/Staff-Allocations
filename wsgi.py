@@ -4,7 +4,7 @@ from flask.cli import with_appcontext, AppGroup
 
 from App.database import db, get_migrate
 from App.main import create_app
-from App.controllers import (create_user, get_all_users_json, get_all_users, create_course, get_all_courses)
+from App.controllers import (create_user, get_ts, create_ts, get_all_users_json, get_all_users, create_course, get_all_courses)
 
 # This commands file allow you to create convenient CLI commands for testing controllers
 
@@ -51,6 +51,21 @@ app.cli.add_command(user_cli) # add the group to the cli
 
 
 course_cli = AppGroup('course', help='course object commands') 
+
+@course_cli.command("createTS", help="Creates a teaching support")
+@click.argument("id", default = "123")
+@click.argument("firstname", default = "Rob")
+@click.argument("lastname", default = "Smith")
+@click.argument("courses", default = "COMP2603")
+@click.argument("email",default = "rob@mail.com")
+def create_ts_command(id, firstname, lastname, courses, email):
+    create_ts(id=id, firstName=firstname, lastName=lastname, courses=courses, email=email)
+    print(f'{id} created!')
+
+@course_cli.command("listTS", help="Lists teaching staff in the database")
+@click.argument("format", default="string")
+def list_user_command(format):
+    print(get_ts())
 
 @course_cli.command("create", help="Creates a course")
 @click.argument("course_id")
