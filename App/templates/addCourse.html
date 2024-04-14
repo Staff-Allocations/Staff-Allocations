@@ -15,7 +15,7 @@
 
 <div>
   <div>
-    <form id="addCourseForm" method="POST" action="/addCourse" style= "border-radius: 25px; border: 2px solid #000000; padding: 150px;  padding-top: 50px; padding-bottom: 50px;">
+    <form id="addCourseForm" method="POST" action="/addCourse" style= "border-radius: 25px; border: 2px solid #000000; padding: 150px; padding-top: 50px; padding-bottom: 50px;">
       <div class="row">
         <div class="input-field col s12">
           <input placeholder="CourseID" id="courseID" name="courseID" type="text" class="validate" style= "color:#000000; border-radius: 35px; height: 25px; border: 2px solid #6d6d6d62; padding: 9px;">
@@ -41,6 +41,11 @@
       </div>
 
       <div class="row">
+        <div class="input-field col s12">
+          <input placeholder="Number of Streams" name="numStreams" id="numStreams" type="text" class="validate" style= "color:#000000; border-radius: 35px; height: 25px; border: 2px solid #6d6d6d62; padding: 9px;">
+        </div>
+      </div>
+      <div class="row">
         <label for="semOffered">Choose the semester it is offered:</label>
           <select name="semOffered" >
             <option value="1">1</option>
@@ -65,9 +70,6 @@
       
         </div>
       </div>
-
-    
-
     </form>
   </div>
 
