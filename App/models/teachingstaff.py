@@ -5,5 +5,6 @@ class TeachingStaff(db.Model):
   firstName = db.Column(db.String(120))
   lastName = db.Column(db.String(120)) 
   courses = db.Column(db.String(120))
-  email = db.Column(db.String(120), nullable = False, unique = True) 
-  
+  email = db.Column(db.String(120), nullable = False, unique = True)
+  type= db.Column (db.String(120), nullable = False)
+  status = db.Column (db.String(120), nullable = False)
