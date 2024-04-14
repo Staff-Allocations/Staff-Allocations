@@ -20,8 +20,10 @@ def add_course():
     courses = data['courses']
     courses = courses.replace(" ", "") #preprocessing
     courses = courses.upper()
+    type = data['type']
+    status = data['status']
 
-    user = create_ts(staff_id, firstName, lastName, courses, email)
+    user = create_ts(staff_id, firstName, lastName, courses, email, type, status)
     if user:
         return redirect('/')
     flash ('Error occured when trying to add staff member')
@@ -32,3 +34,6 @@ def view_staff():
     staff = get_all_ts()
     return render_template('viewStaff.html', staff = staff)
 
+# @staff_views.route('/selectStaff', methods=['GET','POST'])
+# def select_staff():
+#     return render_template('selectType.html')
