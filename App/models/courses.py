@@ -10,6 +10,7 @@ class Courses(db.Model):
     capacity = db.Column(db.Integer, nullable = True)
     numAssessments = db.Column(db.Integer, nullable = False)
     totalCost = db.Column(db.Integer, nullable = True)
+    numStreams = db.Column(db.Integer)
 
     # def getStudents(): 
 
