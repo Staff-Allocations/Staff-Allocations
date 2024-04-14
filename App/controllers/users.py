@@ -4,8 +4,8 @@ from App.config import config
 import requests
 import json
 
-def create_ts(id, firstName, lastName, courses, email):
-    newUser = TeachingStaff (id=id, firstName=firstName, lastName=lastName, courses=courses, email=email)
+def create_ts(id, firstName, lastName, courses, email, type, status):
+    newUser = TeachingStaff (id=id, firstName=firstName, lastName=lastName, courses=courses, email=email, type=type, status=status)
     db.session.add (newUser)
     db.session.commit()
     return newUser
