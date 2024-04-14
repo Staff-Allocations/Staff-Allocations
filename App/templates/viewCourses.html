@@ -1,1 +1,35 @@
+{% extends "layout.html" %}
+{% block title %}Courses{% endblock %}
+{% block page %}Courses{% endblock %}
+{{ super() }}
 
+{% block content %}
+    <table style="width:100%">
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Semester Offered</th>
+            <th>Classification</th>
+            <th>Staff Assigned</th>
+            <th>Enrolled Students</th>
+            <th>Capacity</th>
+            <th>Number of assessments</th>
+            <th>Number of Streams<x/th>
+        </tr>
+        {% for course in courses %}
+        <tr>
+            <td>{{course.course_id}}</td>
+            <td>{{course.course_name}}</td>
+            <td>{{course.sem_offered}}</td>
+            <td>{{course.type}}</td>
+            <td>{{course.staffAssigned}}</td>
+            <td>{{course.currStudents}}</td>
+            <td>{{course.capacity}}</td>
+            <td>{{course.numAssessments}}</td> 
+            <td>add num streams</td>  
+        </tr>
+        {% endfor %}
+        
+    </table>
+
+{% endblock %}
