@@ -6,10 +6,7 @@ class Users(db.Model):
   email = db.Column(db.String(120), nullable = False, unique = True) 
   type = db.Column(db.Integer) #1- admin , 2- teachingstaff 3- teachingsupport, 4- adminassistant
  
-class TeachingStaff(db.Model):
-  id = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
-  firstName = db.Column(db.String(120))
-  lastName =db.Column(db.String(120)) 
+
   #level = db.Column(db.EmployementLevel) 
   
   # def viewCoursesAssigned(): 
@@ -20,7 +17,8 @@ class TeachingStaff(db.Model):
 class TeachingSupport(db.Model):
   id = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
   firstName = db.Column(db.String(120))
-  lastName =db.Column(db.String(120)) 
+  lastName =db.Column(db.String(120))
+  courses = db.Column(db.String(120))
   #level = db.Column(db.EmployementLevel) 
   
   # def viewCoursesAssigned(): 
