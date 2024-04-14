@@ -19,10 +19,10 @@ def add_course():
     course_name = string.capwords(course_name)
     sem_offered = data['semOffered']
     type = data['type']
+    capacity = data['capacity']
+    numAssessments = data['numAssessments']
     staffAssigned=0      #add an advanced toggle to input these
     currStudents=0
-    capacity=200
-    numAssessments=1
     totalCost=0
     course = create_course(course_id, course_name, sem_offered, type, staffAssigned, currStudents, capacity, numAssessments, totalCost)
     if course:
@@ -30,3 +30,8 @@ def add_course():
         return redirect('/')
     flash ('Error occured when trying to add course')
     return redirect ('/')
+
+@course_views.route('/viewCourses', methods=['GET','POST'])
+def view_courses():
+    courses = get_all_courses()
+    return render_template('viewCourses.html', courses = courses)
