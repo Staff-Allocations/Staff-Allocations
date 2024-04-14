@@ -1,11 +1,11 @@
-from App.models import Courses
+from App.models import Courses, Allocation, TeachingStaff
 from App.database import db
 from App.config import config
 import requests
 import json
 
-def create_course(course_id, course_name, sem_offered, type, staffAssigned, currStudents, capacity, numAssessments, totalCost):
-    newCourse = Courses (course_id=course_id, course_name=course_name, sem_offered=sem_offered, type=type, staffAssigned=staffAssigned, currStudents=currStudents, capacity=capacity, numAssessments=numAssessments, totalCost=totalCost)
+def create_course(course_id, course_name, sem_offered, type, staffAssigned, currStudents, capacity, numAssessments, totalCost, numStreams):
+    newCourse = Courses (course_id=course_id, course_name=course_name, sem_offered=sem_offered, type=type, staffAssigned=staffAssigned, currStudents=currStudents, capacity=capacity, numAssessments=numAssessments, totalCost=totalCost, numStreams = numStreams)
     db.session.add (newCourse)
     db.session.commit()
     return newCourse
@@ -49,3 +49,5 @@ def get_total_cost(course_id):
     if (course):
         return course.totalCost
     return None  
+
+
