@@ -15,7 +15,7 @@
 
 <div>
   <div>
-    <form id="addCourseForm" method="POST" action="/addCourse" style= "border-radius: 25px; border: 2px solid #000000; padding: 155px;">
+    <form id="addCourseForm" method="POST" action="/addCourse" style= "border-radius: 25px; border: 2px solid #000000; padding: 150px;  padding-top: 50px; padding-bottom: 50px;">
       <div class="row">
         <div class="input-field col s12">
           <input placeholder="CourseID" id="courseID" name="courseID" type="text" class="validate" style= "color:#000000; border-radius: 35px; height: 25px; border: 2px solid #6d6d6d62; padding: 9px;">
@@ -30,15 +30,32 @@
 
       <div class="row">
         <div class="input-field col s12">
-          <input placeholder="Semester Offered (1, 2 or 3)" name="semOffered" id="semOffered" type="text" class="validate" style= "color:#000000; border-radius: 35px; height: 25px; border: 2px solid #6d6d6d62; padding: 9px;">
+          <input placeholder="Capacity" name="capacity" id="capacity" type="text" class="validate" style= "color:#000000; border-radius: 35px; height: 25px; border: 2px solid #6d6d6d62; padding: 9px;">
         </div>
       </div>
 
       <div class="row">
         <div class="input-field col s12">
-          <input placeholder="Type: 1 for Lab, 2 for Tutorial" name="type" id="type" type="text" class="validate" style= "color:#000000; border-radius: 35px; height: 25px; border: 2px solid #6d6d6d62; padding: 9px;">
+          <input placeholder="Number of Assessments" name="numAssessments" id="numAssessments" type="text" class="validate" style= "color:#000000; border-radius: 35px; height: 25px; border: 2px solid #6d6d6d62; padding: 9px;">
         </div>
       </div>
+
+      <div class="row">
+        <label for="semOffered">Choose the semester it is offered:</label>
+          <select name="semOffered" >
+            <option value="1">1</option>
+            <option value="2">2</option>
+          </select>
+      </div>
+
+      <div class="row">
+        <label for="type">Choose a Type:</label>
+          <select name="type" >
+            <option value="Lab">Lab</option>
+            <option value="Tutorial">Tutorial</option>
+          </select>
+      </div>
+
       <div class="row justify-content">
         <div class="col s4 card-action">
           <input type="submit" class="btn btn-secondary" value="Add Course" style = "border-radius: 12px;">
@@ -48,6 +65,8 @@
       
         </div>
       </div>
+
+    
 
     </form>
   </div>
