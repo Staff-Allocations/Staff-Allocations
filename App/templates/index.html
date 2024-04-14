@@ -6,8 +6,9 @@
 
 
 {% block content %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> 
   <style>
+    tr[data-href]{cursor:pointer;}
     tr:hover {background-color: #D6EEEE;}
     th {border: 1px solid;}
     table {
@@ -28,19 +29,26 @@
       <tr>
         <th>Courses</th>
       </tr>
-          {% for course in courses %}
-          <tr>
+      {% for course in courses %}
+          <tr data-href="/{{course.course_id}}">
             <td>{{course.course_id}} - {{course.course_name}}</td>
           </tr>
-          {% endfor %}
-    </table>
-    <!-- <table class = "inlineTable">
+      {% endfor %}
+  </table>
+  <table >
+    <tr>
+      <th>Course</th>
+      <th>Staff Member</th>
+      <th>Role</th>
+    </tr>
+      {% for staff in staff %}
       <tr>
-        <td>Course</td>
-        <td>Staff Member</td>
-        <td>Role</td>
+        <td>{{courseID}}</td>
+        <td>{{staff.firstName}} {{staff.lastName}}</td>
+        <td>{{staff.type}}</td>
       </tr>
-    </table> -->
+      {% endfor %}
+  </table>
       
     <form class="col-md-4 col-lg-offset-4" method="POST" action="/addCourseDetails">
       <button class="btn waves-effect waves-light" type="submit" name="action">Add Course</button>
@@ -49,7 +57,7 @@
     <form class="col-md-4 col-lg-offset-4" method="POST" action="/addStaffDetails">
       <button class="btn waves-effect waves-light" type="submit" name="action">Add Staff Member</button>
     </form>
-
+    
     <script>
       $(document).ready(function (){  //uses javascript to add a click event to rows in the table: it is used to select a row and then display details on it
         $(document.body).on("click", "tr[data-href]", function(){
@@ -58,6 +66,4 @@
       });
 
     </script>
-{% endblock %}
-    
 {% endblock %}
