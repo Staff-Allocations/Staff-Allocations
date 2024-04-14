@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, jsonify, request, send_from_directory, flash, redirect, url_for
 
-from App.controllers import (get_staff, create_User)
+from App.controllers import (get_all_ts, create_ts)
 
 staff_views = Blueprint('staff_views', __name__, template_folder='../templates')
 
@@ -14,11 +14,21 @@ def add_course():
     data = request.form
     staff_id = data['staffID']
     email = data['email']      
-    email = email.lower()   #some preprocessing to make output neater later
-    type = data['type']
-    
-    user = create_User(id, email, type)
+    email = email.lower()   #some preprocessing 
+    firstName = data['firstName']
+    lastName = data['lastName']
+    courses = data['courses']
+    courses = courses.replace(" ", "") #preprocessing
+    courses = courses.upper()
+
+    user = create_ts(staff_id, firstName, lastName, courses, email)
     if user:
         return redirect('/')
     flash ('Error occured when trying to add staff member')
     return redirect ('/')
+
+@staff_views.route('/viewStaff', methods=['GET','POST'])
+def view_staff():
+    staff = get_all_ts()
+    return render_template('viewStaff.html', staff = staff)
+
