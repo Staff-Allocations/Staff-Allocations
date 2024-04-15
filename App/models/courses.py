@@ -9,7 +9,7 @@ class Courses(db.Model):
     currStudents = db.Column(db.Integer, nullable = True)
     capacity = db.Column(db.Integer, nullable = True)
     numAssessments = db.Column(db.Integer, nullable = False)
-    totalCost = db.Column(db.Integer, nullable = True)
+    #totalCost = db.Column(db.Integer, nullable = True)
     numStreams = db.Column(db.Integer)
 
     # def getStudents(): 
@@ -34,4 +34,3 @@ class Session(db.Model):
     numCredits = db.Column(db.Float, nullable = False) 
     numHours = db.Column(db.Float, nullable = False) 
     numStreams = db.Column(db.Integer) 
-    
