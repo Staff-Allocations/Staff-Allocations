@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, jsonify, request, send_from_directory, flash, redirect, url_for
 import string
-from App.controllers import (get_course, create_course, get_all_courses)
+from App.controllers import (get_course, update_course, create_course, get_all_courses)
 
 course_views = Blueprint('courses_views', __name__, template_folder='../templates')
 
@@ -13,8 +13,8 @@ def add_course():
     data = request.form
     course_id = data['courseID']
     course_name = data['courseName']
-    course_id = course_id.replace(" ", "")
-    course_id = course_id.upper()       #some preprocessing to make output neater later
+    course_id = course_id.replace(" ", "")  #some preprocessing 
+    course_id = course_id.upper()       
     course_name = course_name.lower()
     course_name = string.capwords(course_name)
     sem_offered = data['semOffered']
@@ -36,3 +36,28 @@ def add_course():
 def view_courses():
     courses = get_all_courses()
     return render_template('viewCourses.html', courses = courses)
+
+@course_views.route('/update_course/<course_id>', methods=['GET', 'POST'])
+def update_course_view(course_id):
+    course = get_course(course_id)
+
+    if request.method == 'POST':
+        course_name = request.form['course_name']
+        sem_offered = request.form['sem_offered']
+        type = request.form['type']
+        staffAssigned = request.form['staffAssigned']
+        currStudents = request.form['currStudents']
+        capacity = request.form['capacity']
+        numAssessments = request.form['numAssessments']
+        numStreams = request.form['numStreams']
+        
+        course_id = course_id.replace(" ", "")  #some preprocessing 
+        course_id = course_id.upper()       
+        course_name = course_name.lower()
+        course_name = string.capwords(course_name)
+
+        course = update_course(course_id, course_name, sem_offered, type, staffAssigned, currStudents, capacity, numAssessments, numStreams)
+
+        return redirect(url_for('courses_views.view_courses'))
+
+    return render_template('updateCourses.html', course=course)
