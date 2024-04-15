@@ -43,7 +43,7 @@
       <th>Role</th>
     </tr>
       {% for staff in staff %}
-      <tr data-href="/{{courseID}}/{{staff.id}}">
+      <tr data-href="/{{courseID}}/{{staff.id}}/{{staff.type}}/{{staff.firstName}}/{{staff.lastName}}"> 
         <td>{{staff.firstName}} {{staff.lastName}}</td>
         <td>{{staff.type}}</td>
       </tr>
@@ -61,9 +61,8 @@
       {% for allo in allocations %}
       <tr>
         <td>{{courseID}}</td>
-        <td>{{allo.staffId}} </td>
-        <td>{{allo.type}}
-        <td></td>
+        <td>{{allo.firstName}} {{allo.lastName}} </td>
+        <td>{{allo.type}}</td>
       </tr>
       {% endfor %}
   </table>
