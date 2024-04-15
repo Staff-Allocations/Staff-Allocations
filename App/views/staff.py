@@ -75,4 +75,3 @@ def delete_staff_route(staff_id):
     else: 
         flash('Error in deleting course')
         return redirect(url_for('staff_views.view_staff'))
-      
