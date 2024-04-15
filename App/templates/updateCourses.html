@@ -1,97 +1,68 @@
 {% extends "layout.html" %}
-{% block title %}Update Course Details{% endblock %}
-{% block page %}Update Course Details{% endblock %}
+{% block title %}Courses{% endblock %}
+{% block page %}Courses{% endblock %}
+{{ super() }}
+
 
 {% block content %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> 
+    
+    <style>
+        tr[data-href]{cursor:pointer;}
+        tr:hover {background-color: #D6EEEE;}
+        
+        table {
+          width: 100%;
+          border: 2px solid;
+        }
+        .inlineTable {
+                display: inline-block;
+            }
+    </style>
 
-<style>
-  ::placeholder {
-    color: rgba(0, 0, 0, 0.849);
-  }
-  .course-id {
-    font-size: 1.5em;
-    color: #333; 
-    font-weight: bold; 
-    margin-bottom: 10px; 
-  }
+    <table style="width:100%">
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Semester Offered</th>
+            <th>Classification</th>
+            <th>Staff Assigned</th>
+            <th>Enrolled Students</th>
+            <th>Capacity</th>
+            <th>Number of assessments</th>
+            <th>Number of Streams<x/th>
+        </tr>
+        {% for course in courses %}
+        <tr data-href="/update_course/{{course.course_id}}">
+            <td>{{course.course_id}}</td>
+            <td>{{course.course_name}}</td>
+            <td>{{course.sem_offered}}</td>
+            <td>{{course.type}}</td>
+            <td>{{course.staffAssigned}}</td>
+            <td>{{course.currStudents}}</td>
+            <td>{{course.capacity}}</td>
+            <td>{{course.numAssessments}}</td> 
+            <td>{{course.numStreams}}</td>  
+        </tr>
+        {% endfor %}
+        
+    </table>
 
-</style>
-
-<div>
-  <div>
-    <form id="updateCourseForm" method="POST" action="/update_course/{{course.course_id}}" style= "border-radius: 25px; border: 2px solid #000000; padding: 155px;  padding-top: 50px; padding-bottom: 50px;">
-      <div class="row">
-        <div class="input-field col s12">
-            <h5 class="course-id">Course ID: {{course.course_id }}</h5>
-      </div>
-
-      <div class="row">
-        <div class="input-field col s12">
-            <p>Course Name</p>
-            <input placeholder="{{course.course_name}}" value="{{course.course_name}}" name="course_name" id="course_name" type="text" class="validate" style= "color:#000000; border-radius: 35px; height: 25px; border: 2px solid #6d6d6d62; padding: 9px;">
+    <div class="row">
+        <div class="col-lg-4 offset-lg-8" style="padding-top: 20px;">
+            <form method="POST" action="/addCourseDetails">
+                <button class="btn waves-effect waves-light" type="submit" name="action">Add Course</button>
+            </form>
         </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <p>Staff Assigned</p>
-                <input placeholder="{{course.staffAssigned}}" value="{{course.staffAssigned}}" name="staffAssigned" id="staffAssigned" type="text" class="validate" style= "color:#000000; border-radius: 35px; height: 25px; border: 2px solid #6d6d6d62; padding: 9px;">
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="input-field col s12">
-                <p>Current Number of Students</p>
-                <input placeholder="{{course.currStudents}}" value="{{course.currStudents}}" name="currStudents" id="currStudents" type="text" class="validate" style= "color:#000000; border-radius: 35px; height: 25px; border: 2px solid #6d6d6d62; padding: 9px;">
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="input-field col s12">
-                <p>Course Capicity</p>
-                <input placeholder="{{course.capacity}}" value="{{course.capacity}}" name="capacity" id="capacity" type="text" class="validate" style= "color:#000000; border-radius: 35px; height: 25px; border: 2px solid #6d6d6d62; padding: 9px;">
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="input-field col s12">
-                <p>Number of Assessments</p>
-                <input placeholder="{{course.numAssessments}}" value="{{course.numAssessments}}" name="numAssessments" id="numAssessments" type="text" class="validate" style= "color:#000000; border-radius: 35px; height: 25px; border: 2px solid #6d6d6d62; padding: 9px;">
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="input-field col s12">
-                <p>Number of Streams</p>
-                <input placeholder="{{course.numStreams}}" value="{{course.numStreams}}" name="numStreams" id="numStreams" type="text" class="validate" style= "color:#000000; border-radius: 35px; height: 25px; border: 2px solid #6d6d6d62; padding: 9px;">
-            </div>
-        </div>
-
-            <label for="sem_offered">Choose the semester it is offered:</label>
-            <select name="sem_offered">
-                <option value="1" {% if course.sem_offered == '1' %} selected {% endif %}>1</option>
-                <option value="2" {% if course.sem_offered == '2' %} selected {% endif %}>2</option>
-            </select>
-
-            <div class="row" style="padding-top: 50px;">
-                <label for="type">Choose a Type:</label>
-                <select name="type">
-                <option value="Lab" {% if course.type == 'Lab' %} selected {% endif %}>Lab</option>
-                <option value="Tutorial" {% if course.type == 'Tutorial' %} selected {% endif %}>Tutorial</option>
-                </select>
-            </div>
-          
-
-            <div class="row">
-                <div class="col">
-                    <div class="card-action text-right">
-                        <input type="submit" class="btn btn-secondary" value="Update Staff" style="border-radius: 12px;">
-                    </div>
-                </div>
-            </div>
-
-    </form>
-  </div>
-
-</div>
+    </div>
+    <script>
+        $(document).ready(function (){  //uses javascript to add a click event to rows in the table: it is used to select a row and then display details on it
+          $(document.body).on("click", "tr[data-href]", function(){
+            window.location.href = this.dataset.href;  
+          });
+        });
+      </script>
 
 {% endblock %}
+
+
