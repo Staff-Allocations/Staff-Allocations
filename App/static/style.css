@@ -1,0 +1,43 @@
+body {
+    font-family: Verdana, sans-serif;
+    background: rgb(181,192,208);
+    background: linear-gradient(90deg, rgba(181,192,208,1) 25%, rgba(204,211,202,1) 75%);
+}
+
+h1 {
+    font-family: Verdana, sans-serif;
+    text-align: left;
+}
+
+h5 {
+    font-family: Verdana, sans-serif;
+}
+
+p {
+    text-align: center;
+}
+
+table {
+    background: rgb(245,232,221);
+    background: linear-gradient(90deg, rgba(245,232,221,1) 25%, rgba(238,211,217,1) 75%);
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+button {
+    background-color: #b5c0d0;
+    text-align: center;
+}
+
+button:hover {
+    background-color: #CCD3CA;
+}
+
+nav {
+    background-color: #B5C0D0; 
+}
