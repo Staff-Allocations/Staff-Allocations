@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, jsonify, request, send_from_directory, flash, redirect, url_for
 import string
-from App.controllers import (get_course, update_course, create_course, get_all_courses)
+from App.controllers import (delete_course, get_course, update_course, create_course, get_all_courses)
 
 course_views = Blueprint('courses_views', __name__, template_folder='../templates')
 
@@ -22,10 +22,10 @@ def add_course():
     capacity = data['capacity']
     numAssessments = data['numAssessments']
     numStreams = data['numStreams']
-    staffAssigned=0      #add an advanced toggle to input these
     currStudents=0
     totalCost=0
-    course = create_course(course_id, course_name, sem_offered, type, staffAssigned, currStudents, capacity, numAssessments, totalCost, numStreams)
+    course = create_course(course_id, course_name, sem_offered, type, currStudents, capacity, totalCost, numAssessments, numStreams)
+    
     if course:
         courses = get_all_courses()
         return redirect('/')
@@ -45,7 +45,6 @@ def update_course_view(course_id):
         course_name = request.form['course_name']
         sem_offered = request.form['sem_offered']
         type = request.form['type']
-        staffAssigned = request.form['staffAssigned']
         currStudents = request.form['currStudents']
         capacity = request.form['capacity']
         numAssessments = request.form['numAssessments']
@@ -56,8 +55,19 @@ def update_course_view(course_id):
         course_name = course_name.lower()
         course_name = string.capwords(course_name)
 
-        course = update_course(course_id, course_name, sem_offered, type, staffAssigned, currStudents, capacity, numAssessments, numStreams)
+        course = update_course(course_id, course_name, sem_offered, type, currStudents, capacity, numAssessments, numStreams)
 
         return redirect(url_for('courses_views.view_courses'))
 
     return render_template('updateCourses.html', course=course)
+
+@course_views.route('/delete_course_routes/<course_id>', methods=['POST'])
+def delete_course_route(course_id):
+    deleted = delete_course(course_id)
+    if deleted:
+        flash('Successfully deleted ', course_id)
+        return redirect(url_for('courses_views.view_courses'))
+    else: 
+        flash('Error in deleting course')
+        return redirect(url_for('courses_views.view_courses'))
+    
