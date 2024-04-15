@@ -10,7 +10,7 @@
   <style>
     tr[data-href]{cursor:pointer;}
     tr:hover {background-color: #D6EEEE;}
-    th {border: 1px solid;}
+    th {border-bottom: 1px solid}
     table {
       width: 100%;
       border: 2px solid;
@@ -25,30 +25,37 @@
       <p> Welcome {{current_user.username}} </p>
   {% endif %}
 
-  <table style="width:30%">
-      <tr>
-        <th>Courses</th>
-      </tr>
-      {% for course in courses %}
-          <tr data-href="/{{course.course_id}}">
-            <td>{{course.course_id}} - {{course.course_name}}</td>
-          </tr>
-      {% endfor %}
-  </table>
+  <div style="display: flex;">
+    <div style="width: 30%; margin-right: 20px;">
+        <h5>Courses</h5>
+        <table>
+            <tr>
+                <th>Courses</th>
+            </tr>
+            {% for course in courses %}
+                <tr data-href="/{{course.course_id}}">
+                    <td>{{course.course_id}} - {{course.course_name}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div style="width: 70%;">
+        <h5>Available to Teach</h5>
+        <table>
+            <tr>
+                <th>Staff Member</th>
+                <th>Role</th>
+            </tr>
+            {% for staff in staff %}
+                <tr data-href="/{{courseID}}/{{staff.id}}/{{staff.type}}/{{staff.firstName}}/{{staff.lastName}}">
+                    <td>{{staff.firstName}} {{staff.lastName}}</td>
+                    <td>{{staff.type}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
 
-  <h5>Available to Teach</h5>
-  <table>
-    <tr>
-      <th>Staff Member</th>
-      <th>Role</th>
-    </tr>
-      {% for staff in staff %}
-      <tr data-href="/{{courseID}}/{{staff.id}}/{{staff.type}}/{{staff.firstName}}/{{staff.lastName}}"> 
-        <td>{{staff.firstName}} {{staff.lastName}}</td>
-        <td>{{staff.type}}</td>
-      </tr>
-      {% endfor %}
-  </table>
 
   <h5>Allocations</h5>
 
@@ -59,27 +66,232 @@
       <th>Role</th>
     </tr>
       {% for allo in allocations %}
-      <tr>
+      <tr data-href="/delete_allocation_routes/{{allo.id}}/{{allo.courseId}}">
         <td>{{allo.courseId}}</td>
         <td>{{allo.firstName}} {{allo.lastName}} </td>
         <td>{{allo.type}}</td>
       </tr>
       {% endfor %}
   </table>
-    <form class="col-md-4 col-lg-offset-4" method="POST" action="/addCourseDetails">
-      <button class="btn waves-effect waves-light" type="submit" name="action">Add Course</button>
-    </form>  
 
-    <form class="col-md-4 col-lg-offset-4" method="POST" action="/addStaffDetails">
-      <button class="btn waves-effect waves-light" type="submit" name="action">Add Staff Member</button>
-    </form>
-  
-    <script>
-      $(document).ready(function (){  //uses javascript to add a click event to rows in the table: it is used to select a row and then display details on it
-        $(document.body).on("click", "tr[data-href]", function(){
-          window.location.href = this.dataset.href;  
-        });
+  <div class="row">
+    <div class="col-md-6">
+        <form method="POST" action="/addCourseDetails" style="display: inline-block; padding-right: 10px; padding-top: 10px;">
+            <button class="btn waves-effect waves-light" type="submit" name="action">Add Course</button>
+        </form>
+        <form method="POST" action="/addStaffDetails" style="display: inline-block;">
+            <button class="btn waves-effect waves-light" type="submit" name="action">Add Staff Member</button>
+        </form>
+    </div>
+</div>
+
+
+
+
+  <script>
+    $(document).ready(function (){  //uses javascript to add a click event to rows in the table: it is used to select a row and then display details on it
+      $(document.body).on("click", "tr[data-href]", function(){
+        window.location.href = this.dataset.href;  
       });
+    });
+    
+  </script>
+{% endblock %}
+{% extends "layout.html" %}
+{% block title %}Staff Allocations{% endblock %}
+{% block page %}Staff Allocations{% endblock %}
 
-    </script>
+{{ super() }}
+
+
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> 
+  <style>
+    tr[data-href]{cursor:pointer;}
+    tr:hover {background-color: #D6EEEE;}
+    th {border-bottom: 1px solid}
+    table {
+      width: 100%;
+      border: 2px solid;
+    }
+    .inlineTable {
+            display: inline-block;
+        }
+  </style>
+
+  <h1>Dashboard</h1>
+  {% if is_authenticated %}
+      <p> Welcome {{current_user.username}} </p>
+  {% endif %}
+
+  <div style="display: flex;">
+    <div style="width: 30%; margin-right: 20px;">
+        <h5>Courses</h5>
+        <table>
+            <tr>
+                <th>Courses</th>
+            </tr>
+            {% for course in courses %}
+                <tr data-href="/{{course.course_id}}">
+                    <td>{{course.course_id}} - {{course.course_name}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div style="width: 70%;">
+        <h5>Available to Teach</h5>
+        <table>
+            <tr>
+                <th>Staff Member</th>
+                <th>Role</th>
+            </tr>
+            {% for staff in staff %}
+                <tr data-href="/{{courseID}}/{{staff.id}}/{{staff.type}}/{{staff.firstName}}/{{staff.lastName}}">
+                    <td>{{staff.firstName}} {{staff.lastName}}</td>
+                    <td>{{staff.type}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+
+  <h5>Allocations</h5>
+
+  <table >
+    <tr>
+      <th>Course</th>
+      <th>Staff Member</th>
+      <th>Role</th>
+    </tr>
+      {% for allo in allocations %}
+      <tr data-href="/delete_allocation_routes/{{allo.id}}/{{allo.courseId}}">
+        <td>{{allo.courseId}}</td>
+        <td>{{allo.firstName}} {{allo.lastName}} </td>
+        <td>{{allo.type}}</td>
+      </tr>
+      {% endfor %}
+  </table>
+
+  <div class="row">
+    <div class="col-md-6">
+        <form method="POST" action="/addCourseDetails" style="display: inline-block; padding-right: 10px; padding-top: 10px;">
+            <button class="btn waves-effect waves-light" type="submit" name="action">Add Course</button>
+        </form>
+        <form method="POST" action="/addStaffDetails" style="display: inline-block;">
+            <button class="btn waves-effect waves-light" type="submit" name="action">Add Staff Member</button>
+        </form>
+    </div>
+</div>
+
+
+
+
+  <script>
+    $(document).ready(function (){  //uses javascript to add a click event to rows in the table: it is used to select a row and then display details on it
+      $(document.body).on("click", "tr[data-href]", function(){
+        window.location.href = this.dataset.href;  
+      });
+    });
+    
+  </script>
+{% endblock %}
+{% extends "layout.html" %}
+{% block title %}Staff Allocations{% endblock %}
+{% block page %}Staff Allocations{% endblock %}
+
+{{ super() }}
+
+
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> 
+  <style>
+    tr[data-href]{cursor:pointer;}
+    tr:hover {background-color: #D6EEEE;}
+    th {border-bottom: 1px solid}
+    table {
+      width: 100%;
+      border: 2px solid;
+    }
+    .inlineTable {
+            display: inline-block;
+        }
+  </style>
+
+  <h1>Dashboard</h1>
+  {% if is_authenticated %}
+      <p> Welcome {{current_user.username}} </p>
+  {% endif %}
+
+  <div style="display: flex;">
+    <div style="width: 30%; margin-right: 20px;">
+        <h5>Courses</h5>
+        <table>
+            <tr>
+                <th>Courses</th>
+            </tr>
+            {% for course in courses %}
+                <tr data-href="/{{course.course_id}}">
+                    <td>{{course.course_id}} - {{course.course_name}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div style="width: 70%;">
+        <h5>Available to Teach</h5>
+        <table>
+            <tr>
+                <th>Staff Member</th>
+                <th>Role</th>
+            </tr>
+            {% for staff in staff %}
+                <tr data-href="/{{courseID}}/{{staff.id}}/{{staff.type}}/{{staff.firstName}}/{{staff.lastName}}">
+                    <td>{{staff.firstName}} {{staff.lastName}}</td>
+                    <td>{{staff.type}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+
+  <h5>Allocations</h5>
+
+  <table >
+    <tr>
+      <th>Course</th>
+      <th>Staff Member</th>
+      <th>Role</th>
+    </tr>
+      {% for allo in allocations %}
+      <tr data-href="/delete_allocation_routes/{{allo.id}}/{{allo.courseId}}">
+        <td>{{allo.courseId}}</td>
+        <td>{{allo.firstName}} {{allo.lastName}} </td>
+        <td>{{allo.type}}</td>
+      </tr>
+      {% endfor %}
+  </table>
+
+  <div class="row">
+    <div class="col-md-6">
+        <form method="POST" action="/addCourseDetails" style="display: inline-block; padding-right: 10px; padding-top: 10px;">
+            <button class="btn waves-effect waves-light" type="submit" name="action">Add Course</button>
+        </form>
+        <form method="POST" action="/addStaffDetails" style="display: inline-block;">
+            <button class="btn waves-effect waves-light" type="submit" name="action">Add Staff Member</button>
+        </form>
+    </div>
+</div>
+
+
+
+
+  <script>
+    $(document).ready(function (){  //uses javascript to add a click event to rows in the table: it is used to select a row and then display details on it
+      $(document.body).on("click", "tr[data-href]", function(){
+        window.location.href = this.dataset.href;  
+      });
+    });
+    
+  </script>
 {% endblock %}
