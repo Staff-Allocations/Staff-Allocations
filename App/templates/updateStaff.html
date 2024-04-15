@@ -27,26 +27,32 @@
 
       <div class="row">
         <div class="input-field col s12">
+          <p>First Name</p>
           <input placeholder="{{staff.firstName}}" value="{{staff.firstName}}" name="firstName" id="firstName" type="text" class="validate" style= "color:#000000; border-radius: 35px; height: 25px; border: 2px solid #6d6d6d62; padding: 9px;">
         </div>
       </div>
 
       <div class="row">
         <div class="input-field col s12">
+          <p>Surname</p>
           <input placeholder="{{staff.lastName}}" value="{{staff.lastName}}" name="lastName" id="lastName" type="text" class="validate" style= "color:#000000; border-radius: 35px; height: 25px; border: 2px solid #6d6d6d62; padding: 9px;">
         </div>
       </div>
 
       <div class="row">
         <div class="input-field col s12">
-          <input placeholder="{{staff.courses}}" value="{{staff.courses}}" name="courses" id="courses" type="text" class="validate" style= "color:#000000; border-radius: 35px; height: 25px; border: 2px solid #6d6d6d62; padding: 9px;">
+          <p>Email Addess</p>
+          <input placeholder="{{staff.email}}" value="{{staff.email}}" name="email" id="email" type="email" class="validate" style= "color:#000000; border-radius: 35px; height: 25px; border: 2px solid #6d6d6d62; padding: 9px;">
         </div>
       </div>
 
       <div class="row">
-        <div class="input-field col s12">
-          <input placeholder="{{staff.email}}" value="{{staff.email}}" name="email" id="email" type="email" class="validate" style= "color:#000000; border-radius: 35px; height: 25px; border: 2px solid #6d6d6d62; padding: 9px;">
-        </div>
+        <label for="courses">Select Courses:</label>
+        <select name="courses" multiple>
+          {% for course in courses %}
+            <option value="{{course.course_id}}">{{course.course_id}} - {{course.course_name}}</option>
+          {% endfor %}
+        </select>
       </div>
 
       <div class="row">
@@ -74,10 +80,24 @@
             </div>
         </div>
     </div>
-
     </form>
-  </div>
 
+    <div class="row">
+      <div class="col-md-4">
+          <form id="deleteForm" method="POST" action="/delete_staff_routes/{{staff.id}}" style="padding-left: 10px;">
+              <button type="button" class="btn waves-effect waves-light" style="border-radius: 12px; background-color: red; color: white;" onclick="confirmDelete()">Delete {{staff.firstName}} {{staff.lastName}}</button>
+          </form>
+      </div>
+    </div>
+  </div>
 </div>
 
+<script>
+  function confirmDelete() {
+      if (confirm("Are you sure you want to delete {{staff.firstName}} {{staff.lastName}}?")) {
+          document.getElementById("deleteForm").submit();
+      } else {
+      }
+  }
+</script>
 {% endblock %}
