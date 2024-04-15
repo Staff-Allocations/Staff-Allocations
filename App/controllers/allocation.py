@@ -9,7 +9,7 @@ def allocate_staff(id, course_id, staff_id, type, firstName, lastName):
     db.session.add (newAllo)
     db.session.commit()
     return newAllo
-    return None
+    
 
 def get_allocations(course_id):
     return Allocation.query.filter_by(courseId=course_id)
