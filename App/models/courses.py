@@ -14,9 +14,8 @@ class Courses(db.Model):
     course_name = db.Column(db.String(120), nullable=False, unique=True)
     sem_offered = db.Column(db.Integer)
     type = db.Column(db.String(120)) 
-    
+    lab_size = (db.Integer)
     staffAssigned = relationship("Users", secondary=course_staff_association)
-
     currStudents = db.Column(db.Integer, nullable=True)
     capacity = db.Column(db.Integer, nullable=True)
     numAssessments = db.Column(db.Integer, nullable=False) 
