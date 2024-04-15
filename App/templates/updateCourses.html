@@ -22,7 +22,7 @@
     <form id="updateCourseForm" method="POST" action="/update_course/{{course.course_id}}" style= "border-radius: 25px; border: 2px solid #000000; padding: 155px;  padding-top: 50px; padding-bottom: 50px;">
       <div class="row">
         <div class="input-field col s12">
-            <h5 class="course-id">Course ID: {{course.course_id }}</h5>
+            <h5 class="course-id">Course ID: {{course.course_id}}</h5>
       </div>
 
       <div class="row">
@@ -31,12 +31,7 @@
             <input placeholder="{{course.course_name}}" value="{{course.course_name}}" name="course_name" id="course_name" type="text" class="validate" style= "color:#000000; border-radius: 35px; height: 25px; border: 2px solid #6d6d6d62; padding: 9px;">
         </div>
         </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <p>Staff Assigned</p>
-                <input placeholder="{{course.staffAssigned}}" value="{{course.staffAssigned}}" name="staffAssigned" id="staffAssigned" type="text" class="validate" style= "color:#000000; border-radius: 35px; height: 25px; border: 2px solid #6d6d6d62; padding: 9px;">
-            </div>
-        </div>
+        
 
         <div class="row">
             <div class="input-field col s12">
@@ -81,17 +76,32 @@
             </div>
           
 
-            <div class="row">
-                <div class="col">
-                    <div class="card-action text-right">
-                        <input type="submit" class="btn btn-secondary" value="Update Staff" style="border-radius: 12px;">
-                    </div>
+            <div class="row justify-content-start">
+                <div class="col s4 card-action">
+                  <input type="submit" class="btn btn-secondary" value="Update Course" style="border-radius: 12px;">
                 </div>
-            </div>
-
+            </div> 
     </form>
+
+    <div class="row">
+        <div class="col-md-4">
+            <form id="deleteForm" method="POST" action="/delete_course_routes/{{course.course_id}}" style="padding-left: 8px;">
+                <button type="button" class="btn waves-effect waves-light" style="border-radius: 12px; background-color: red; color: white;" onclick="confirmDelete()">Delete {{course.course_id}}</button>
+            </form>
+        </div>
+    </div>
+    
+
   </div>
 
 </div>
 
+<script>
+    function confirmDelete() {
+        if (confirm("Are you sure you want to delete {{course.course_id}}?")) {
+            document.getElementById("deleteForm").submit();
+        } else {
+        }
+    }
+</script>
 {% endblock %}
