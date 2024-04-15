@@ -1,1 +1,46 @@
+{% extends "layout.html" %}
 
+{% block title %}Update Pay{% endblock %}
+
+{% block page %}Update Pay{% endblock %}
+
+{% block content %}
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <form method="POST" action="/addpay">
+                    <div class="form-group">
+                        <label for="staffType">Staff Type:</label>
+                        <select class="form-control" id="staffType" name="staffType">
+                            <option value="Lecturer">Lecturer</option>
+                            <option value="Instructor">Instructor</option>
+                            <option value="Teaching Assistant">Teaching Assistant</option>
+                            <option value="Tutor">Tutor</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Status:</label>
+                        <select class="form-control" id="status" name="status">
+                            <option value="Full Time">Full Time</option>
+                            <option value="Part Time">Part Time</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="payRate">Pay Rate:</label>
+                        <input type="text" class="form-control" id="payRate" name="payRate">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Pay Rate</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function (){  //uses javascript to add a click event to rows in the table: it is used to select a row and then display details on it
+          $(document.body).on("click", "tr[data-href]", function(){
+            window.location.href = this.dataset.href;  
+          });
+        });
+      </script>
+{% endblock %}   
