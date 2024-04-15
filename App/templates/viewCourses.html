@@ -10,7 +10,7 @@
     <style>
         tr[data-href]{cursor:pointer;}
         tr:hover {background-color: #D6EEEE;}
-        
+        th {border-bottom: 1px solid}
         table {
           width: 100%;
           border: 2px solid;
@@ -26,7 +26,6 @@
             <th>Title</th>
             <th>Semester Offered</th>
             <th>Classification</th>
-            <th>Staff Assigned</th>
             <th>Enrolled Students</th>
             <th>Capacity</th>
             <th>Number of assessments</th>
@@ -38,7 +37,6 @@
             <td>{{course.course_name}}</td>
             <td>{{course.sem_offered}}</td>
             <td>{{course.type}}</td>
-            <td>{{course.staffAssigned}}</td>
             <td>{{course.currStudents}}</td>
             <td>{{course.capacity}}</td>
             <td>{{course.numAssessments}}</td> 
