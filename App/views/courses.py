@@ -21,10 +21,11 @@ def add_course():
     type = data['type']
     capacity = data['capacity']
     numAssessments = data['numAssessments']
+    lab_size = request.form['lab_size']
     numStreams = data['numStreams']
     currStudents=0
     totalCost=0
-    course = create_course(course_id, course_name, sem_offered, type, currStudents, capacity, totalCost, numAssessments, numStreams)
+    course = create_course(course_id, course_name, sem_offered, type, lab_size, currStudents, capacity, totalCost, numAssessments, numStreams)
     
     if course:
         courses = get_all_courses()
@@ -48,6 +49,7 @@ def update_course_view(course_id):
         currStudents = request.form['currStudents']
         capacity = request.form['capacity']
         numAssessments = request.form['numAssessments']
+        lab_size = request.form['lab_size']
         numStreams = request.form['numStreams']
         
         course_id = course_id.replace(" ", "")  #some preprocessing 
@@ -55,7 +57,7 @@ def update_course_view(course_id):
         course_name = course_name.lower()
         course_name = string.capwords(course_name)
 
-        course = update_course(course_id, course_name, sem_offered, type, currStudents, capacity, numAssessments, numStreams)
+        course = update_course(course_id, course_name, sem_offered, type, lab_size, currStudents, capacity, numAssessments, numStreams)
 
         return redirect(url_for('courses_views.view_courses'))
 
