@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+{% block title %}Update Staff Member{% endblock %}
+{% block page %}Update Staff Member{% endblock %}
+
+{% block content %}
+
+<style>
+  ::placeholder {
+    color: rgba(0, 0, 0, 0.849);
+  }
+  .staff-id {
+    font-size: 1.5em;
+    color: #333; 
+    font-weight: bold; 
+    margin-bottom: 10px; 
+  }
+
+</style>
+
+<div>
+  <div>
+    <form id="updateStaffForm" method="POST" action="/update_staff/{{staff.id}}" style= "border-radius: 25px; border: 2px solid #000000; padding: 155px;  padding-top: 50px; padding-bottom: 50px;">
+      <div class="row">
+        <div class="input-field col s12">
+            <h5 class="staff-id">Staff ID: {{ staff.id }}</h5>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input placeholder="{{staff.firstName}}" value="{{staff.firstName}}" name="firstName" id="firstName" type="text" class="validate" style= "color:#000000; border-radius: 35px; height: 25px; border: 2px solid #6d6d6d62; padding: 9px;">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input placeholder="{{staff.lastName}}" value="{{staff.lastName}}" name="lastName" id="lastName" type="text" class="validate" style= "color:#000000; border-radius: 35px; height: 25px; border: 2px solid #6d6d6d62; padding: 9px;">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input placeholder="{{staff.courses}}" value="{{staff.courses}}" name="courses" id="courses" type="text" class="validate" style= "color:#000000; border-radius: 35px; height: 25px; border: 2px solid #6d6d6d62; padding: 9px;">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input placeholder="{{staff.email}}" value="{{staff.email}}" name="email" id="email" type="email" class="validate" style= "color:#000000; border-radius: 35px; height: 25px; border: 2px solid #6d6d6d62; padding: 9px;">
+        </div>
+      </div>
+
+      <div class="row">
+        <label for="type">Choose a Type:</label>
+            <select name="type">
+                <option value="Lecturer" {% if staff.type == "Lecturer" %} selected {% endif %}>Lecturer</option>
+                <option value="Instructor" {% if staff.type == "Instructor" %} selected {% endif %}>Instructor</option>
+                <option value="Tutor" {% if staff.type == "Tutor" %} selected {% endif %}>Tutor</option>
+                <option value="Teaching Assistant" {% if staff.type == "Teaching Assistant" %} selected {% endif %}>Teaching Assistant</option>
+            </select>
+      </div>
+      
+    <div class="row">
+    <label for="status">Choose the status:</label>
+        <select name="status">
+            <option value="Full Time" {% if staff.status == "Full Time" %} selected {% endif %}>Full Time</option>
+            <option value="Part Time" {% if staff.status == "Part Time" %} selected {% endif %}>Part Time</option>
+        </select>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="card-action text-right">
+                <input type="submit" class="btn btn-secondary" value="Update Staff" style="border-radius: 12px;">
+            </div>
+        </div>
+    </div>
+
+    </form>
+  </div>
+
+</div>
+
+{% endblock %}
