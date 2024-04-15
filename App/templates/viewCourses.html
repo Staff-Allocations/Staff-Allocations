@@ -29,6 +29,7 @@
             <th>Enrolled Students</th>
             <th>Capacity</th>
             <th>Number of assessments</th>
+            <th>Lab Size</th>
             <th>Number of Streams<x/th>
         </tr>
         {% for course in courses %}
@@ -39,7 +40,8 @@
             <td>{{course.type}}</td>
             <td>{{course.currStudents}}</td>
             <td>{{course.capacity}}</td>
-            <td>{{course.numAssessments}}</td> 
+            <td>{{course.numAssessments}}</td>
+            <td>{{course.lab_size}}</td>
             <td>{{course.numStreams}}</td>  
         </tr>
         {% endfor %}
@@ -62,5 +64,3 @@
       </script>
 
 {% endblock %}
-
-
