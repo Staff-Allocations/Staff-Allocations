@@ -4,12 +4,13 @@ from App.config import config
 import requests
 import json
 
-def create_course(course_id, course_name, sem_offered, type, staffAssigned, currStudents, capacity, numAssessments, totalCost, numStreams):
-    newCourse = Courses (course_id=course_id, course_name=course_name, sem_offered=sem_offered, type=type, staffAssigned=staffAssigned, currStudents=currStudents, capacity=capacity, numAssessments=numAssessments, numStreams = numStreams)
-    db.session.add (newCourse) #, totalCost=totalCost
+def create_course(course_id, course_name, sem_offered, type, currStudents, capacity, numAssessments, totalCost, numStreams):
+    newCourse = Courses(course_id=course_id, course_name=course_name, sem_offered=sem_offered, type=type, currStudents=currStudents, capacity=capacity, numAssessments=numAssessments, numStreams=numStreams, totalCost=totalCost)
+    db.session.add(newCourse)
     db.session.commit()
+
     return newCourse
-  
+
 def get_course(course_id):
     course = Courses.query.filter_by(course_id = course_id).first()
     if (course):
@@ -50,7 +51,7 @@ def get_total_cost(course_id):
         return course.totalCost
     return None  
 
-def update_course(course_id, course_name, sem_offered, type, staffAssigned, currStudents, capacity, numAssessments, numStreams):
+def update_course(course_id, course_name, sem_offered, type, currStudents, capacity, numAssessments, numStreams):
     course = get_course(course_id)
 
     if course:
@@ -58,7 +59,6 @@ def update_course(course_id, course_name, sem_offered, type, staffAssigned, curr
         course.course_name = course_name
         course.sem_offered = sem_offered
         course.type = type
-        course.staffAssigned = staffAssigned
         course.currStudents = currStudents
         course.capacity = capacity
         course.numAssessments = numAssessments
@@ -67,3 +67,18 @@ def update_course(course_id, course_name, sem_offered, type, staffAssigned, curr
         db.session.commit()
         return course
     return None       
+
+def delete_course(course_id):
+    course = get_course(course_id)
+    
+    if course:
+        try:
+            db.session.delete(course)
+            db.session.commit()
+            return True  #Indicate successful deletion
+        except Exception as e:
+            db.session.rollback() 
+            print(f"Error deleting course: {e}")
+            return False  #Indicate failure
+    else:
+        return False
