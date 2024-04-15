@@ -5,8 +5,8 @@ import requests
 import json
 
 def create_course(course_id, course_name, sem_offered, type, staffAssigned, currStudents, capacity, numAssessments, totalCost, numStreams):
-    newCourse = Courses (course_id=course_id, course_name=course_name, sem_offered=sem_offered, type=type, staffAssigned=staffAssigned, currStudents=currStudents, capacity=capacity, numAssessments=numAssessments, totalCost=totalCost, numStreams = numStreams)
-    db.session.add (newCourse)
+    newCourse = Courses (course_id=course_id, course_name=course_name, sem_offered=sem_offered, type=type, staffAssigned=staffAssigned, currStudents=currStudents, capacity=capacity, numAssessments=numAssessments, numStreams = numStreams)
+    db.session.add (newCourse) #, totalCost=totalCost
     db.session.commit()
     return newCourse
   
