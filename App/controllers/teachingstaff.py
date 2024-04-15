@@ -11,9 +11,9 @@ def create_ts(id, firstName, lastName, courses, email, type, status):
     return newUser
   
 def get_ts(id):
-    user = TeachingStaff.query.filter_by(id = id).first
-    if (user):
-        return user
+    staff = TeachingStaff.query.get(id)
+    if (staff):
+        return staff
     return None
 
 def get_all_ts():
@@ -30,3 +30,19 @@ def get_available_staff(course_id):
     if (staff): 
         return staff
     return None
+
+def update_staff(id, firstName, lastName, courses, email, type, status):
+    staff = get_ts(id)
+    
+    if staff:
+        staff.id = int(id)
+        staff.firstName = firstName
+        staff.lastName = lastName
+        staff.courses = courses
+        staff.email = email
+        staff.type = type
+        staff.status = status
+
+        db.session.commit()
+        return staff
+    return None       
