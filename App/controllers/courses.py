@@ -4,8 +4,8 @@ from App.config import config
 import requests
 import json
 
-def create_course(course_id, course_name, sem_offered, type, currStudents, capacity, numAssessments, totalCost, numStreams):
-    newCourse = Courses(course_id=course_id, course_name=course_name, sem_offered=sem_offered, type=type, currStudents=currStudents, capacity=capacity, numAssessments=numAssessments, numStreams=numStreams, totalCost=totalCost)
+def create_course(course_id, course_name, sem_offered, type, lab_size, currStudents, capacity, numAssessments, totalCost, numStreams):
+    newCourse = Courses(course_id=course_id, course_name=course_name, sem_offered=sem_offered, type=type, lab_size=lab_size, currStudents=currStudents, capacity=capacity, numAssessments=numAssessments, numStreams=numStreams, totalCost=totalCost)
     db.session.add(newCourse)
     db.session.commit()
 
@@ -51,7 +51,7 @@ def get_total_cost(course_id):
         return course.totalCost
     return None  
 
-def update_course(course_id, course_name, sem_offered, type, currStudents, capacity, numAssessments, numStreams):
+def update_course(course_id, course_name, sem_offered, type, lab_size, currStudents, capacity, numAssessments, numStreams):
     course = get_course(course_id)
 
     if course:
@@ -59,6 +59,7 @@ def update_course(course_id, course_name, sem_offered, type, currStudents, capac
         course.course_name = course_name
         course.sem_offered = sem_offered
         course.type = type
+        course.lab_size=lab_size
         course.currStudents = currStudents
         course.capacity = capacity
         course.numAssessments = numAssessments
