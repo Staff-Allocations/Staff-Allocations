@@ -22,15 +22,15 @@
 
     <table style="width:100%">
         <tr>
-            <th>Staff Type</th>
+            <th>Type</th>
             <th>Status</th>
-            <th>Pay Rate</th>
+            <th>Pay Rate Per Stream</th>
         </tr>
         {% for rate in rates %}
             <tr data-href = "/updatepay/{{rate.id}}">
                 <td>{{rate.staff_type}}</td>
                 <td>{{rate.status}}</td>
-                <td>{{rate.pay}}</td>
+                <td>${{rate.pay}}</td>
             </tr>
         {% endfor %}
     </table>
