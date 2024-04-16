@@ -1,6 +1,6 @@
 from flask import flash, Blueprint, redirect, render_template, request, send_from_directory, jsonify, url_for
 from App.models import db
-from App.controllers import delete_allocation, is_allocated, set_role, get_allocations, allocate_staff, get_course, get_available_staff, get_all_courses
+from App.controllers import delete_allocation, is_allocated, set_role, get_allocations, allocate_staff, get_course, get_available_staff, get_all_courses, calculate_lab_streams
 
 allocation_views = Blueprint('allocation_views', __name__, template_folder='../templates')
 
@@ -9,9 +9,11 @@ def return_staff(course_id):
     allocations = get_allocations(course_id)
     courses = get_all_courses()
     staff = get_available_staff(course_id)
+    rec_streams = calculate_lab_streams (course_id)
+    sel_course=get_course(course_id)
     if staff is None:
         staff = []
-    return render_template('index.html', courseID=course_id, courses = courses, staff = staff,  allocations= allocations )
+    return render_template('index.html', courseID=course_id, courses = courses, staff = staff,  allocations= allocations, rec_streams=rec_streams, sel_course= sel_course)
 
 @allocation_views.route('/<course_id>/<staff_id>/<role>/<fname>/<lname>', methods = ['GET','POST'])
 def allocateStaff(course_id, staff_id, role, fname, lname):
