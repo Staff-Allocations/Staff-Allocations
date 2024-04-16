@@ -15,20 +15,24 @@
 <div>
     <div>
         <form id="updatePayForm" method="POST" action="/updatepay/{{rate.id}}" style= "border-radius: 25px; border: 2px solid #000000; padding: 155px;  padding-top: 50px; padding-bottom: 50px;">
-    
-            <label for="staffType">Choose the semester it is offered:</label>
+            
+
+            <h5>{{rate.staff_type}}</h5>
+            <!-- <label for="staffType">Choose the semester it is offered:</label>
             <select name="staffType">
                 <option value="Lecturer" {% if rate.staff_type == 'Lecturer' %} selected {% endif %}>Lecturer</option>
                 <option value="Instructor" {% if rate.staff_type == 'Instructor' %} selected {% endif %}>Instructor</option>
                 <option value="Teaching Assistant" {% if rate.staff_type == 'Teaching Assistant' %} selected {% endif %}>Teaching Assistant</option>
                 <option value="Tutor" {% if rate.staff_type == 'Tutor' %} selected {% endif %}>Tutor</option>  
-            </select>
+            </select> -->
             
-            <label for="status">Choose the semester it is offered:</label>
+            <!-- <label for="status">Choose the semester it is offered:</label>
             <select name="status">
                 <option value="Full Time" {% if rate.status == 'Full Time' %} selected {% endif %}>Full Time</option>
                 <option value="Part Time" {% if rate.status == 'Part Time' %} selected {% endif %}>Part Time</option>      
-            </select>
+            </select> -->
+            <h5>{{rate.status}}</h5>
+           
 
             <div class="row">
                 <div class="input-field col s12">
