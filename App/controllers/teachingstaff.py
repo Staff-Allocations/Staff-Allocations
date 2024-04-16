@@ -73,3 +73,11 @@ def delete_staff(staff_id):
             return False  #Indicate failure
     else:
         return False
+
+def get_staff_type_and_status(staff_id):
+    staff = TeachingStaff.query.filter_by(id=staff_id).first()
+
+    if staff:
+        return staff.type, staff.status
+    else:
+        return None, None
