@@ -15,12 +15,12 @@ def get_payrate(id):
         return payrate
     return None
 
-def update_payrate(id, staff_type, status, pay):
+def update_payrate(id, pay):
     payrate =get_payrate(id)
 
     if payrate:
-        payrate.staff_type=staff_type
-        payrate.status=status
+        # payrate.staff_type=staff_type
+        # payrate.status=status
         payrate.pay=pay
         db.session.commit()
 
