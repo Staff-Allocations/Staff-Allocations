@@ -49,13 +49,14 @@ def update_course_view(course_id):
         currStudents = request.form['currStudents']
         capacity = request.form['capacity']
         numAssessments = request.form['numAssessments']
-        lab_size = request.form['lab_size']
+        lab_size = request.form.get('lab_size')
         numStreams = request.form['numStreams']
         
         course_id = course_id.replace(" ", "")  #some preprocessing 
         course_id = course_id.upper()       
         course_name = course_name.lower()
         course_name = string.capwords(course_name)
+        lab_size = int(lab_size)
 
         course = update_course(course_id, course_name, sem_offered, type, lab_size, currStudents, capacity, numAssessments, numStreams)
 
