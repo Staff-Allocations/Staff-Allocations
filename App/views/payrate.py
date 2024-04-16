@@ -37,11 +37,11 @@ def update_rates(id):
     rate= get_payrate(id)
 
     if request.method == 'POST':
-        staff_type = request.form['staffType']
-        status = request.form['status']
+        # staff_type = request.form['staffType']
+        # status = request.form['status']
         pay = request.form.get('payRate')
 
-        rate = update_payrate (id, staff_type, status, pay)
+        rate = update_payrate (id, pay)
 
         return redirect (url_for('payrate_views.view_rates'))
     
