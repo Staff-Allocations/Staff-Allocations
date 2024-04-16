@@ -3,6 +3,7 @@ from App.database import db
 from App.config import config
 import requests
 import json
+import math
 
 def create_course(course_id, course_name, sem_offered, type, lab_size, currStudents, capacity, numAssessments, totalCost, numStreams):
     newCourse = Courses(course_id=course_id, course_name=course_name, sem_offered=sem_offered, type=type, lab_size=lab_size, currStudents=currStudents, capacity=capacity, numAssessments=numAssessments, numStreams=numStreams, totalCost=totalCost)
@@ -83,3 +84,12 @@ def delete_course(course_id):
             return False  #Indicate failure
     else:
         return False
+
+def calculate_lab_streams(course_id):
+    course = get_course(course_id)
+
+    if course:
+        rec_streams = math.ceil(course.capacity/course.lab_size)
+        
+        return rec_streams
+    return None
