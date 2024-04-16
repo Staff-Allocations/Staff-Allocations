@@ -8,12 +8,14 @@ allocation_views = Blueprint('allocation_views', __name__, template_folder='../t
 def return_staff(course_id):
     cost=0
     cost2=0
+    totalcost=0
     allocations = get_allocations(course_id)
     courses = get_all_courses()
     courses = sorted(courses, key=lambda x: x.course_name)
     staff = get_available_staff(course_id)
     rec_streams = calculate_lab_streams (course_id)
-    rec_streams = int(rec_streams)
+    if rec_streams is not None:
+        rec_streams= int(rec_streams)
     sel_course=get_course(course_id)
     
 
@@ -25,7 +27,7 @@ def return_staff(course_id):
             if rate is not None:
                 cost += calculate_cost(rate, rec_streams)
 
-    for allo in allocations:        #for estimated cost
+    for allo in allocations:        #for actual cost
         staff_ids = get_staff_id_for_course_and_type(course_id, allo.type)
         for staffID in staff_ids:
             type, status = get_staff_type_and_status(staffID)
@@ -36,7 +38,7 @@ def return_staff(course_id):
                 update_totalCost(course_id, cost2)
 
     totalcost= calculate_total_cost()
-    cost = format(cost, '.2f')
+    # cost = format(cost, '.2f')
     cost2 = format(cost2, '.2f')
     totalcost= format(totalcost, '.2f')
     if staff is None:
