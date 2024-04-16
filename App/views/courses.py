@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, jsonify, request, send_from_directory, flash, redirect, url_for
 import string
-from App.controllers import (delete_course, get_course, update_course, create_course, get_all_courses)
+from App.controllers import (update_numStreams, delete_course, get_course, update_course, create_course, get_all_courses)
 
 course_views = Blueprint('courses_views', __name__, template_folder='../templates')
 
@@ -49,14 +49,13 @@ def update_course_view(course_id):
         currStudents = request.form['currStudents']
         capacity = request.form['capacity']
         numAssessments = request.form['numAssessments']
-        lab_size = request.form.get('lab_size')
+        lab_size = request.form['lab_size']
         numStreams = request.form['numStreams']
         
         course_id = course_id.replace(" ", "")  #some preprocessing 
         course_id = course_id.upper()       
         course_name = course_name.lower()
         course_name = string.capwords(course_name)
-        lab_size = int(lab_size)
 
         course = update_course(course_id, course_name, sem_offered, type, lab_size, currStudents, capacity, numAssessments, numStreams)
 
@@ -74,3 +73,9 @@ def delete_course_route(course_id):
         flash('Error in deleting course')
         return redirect(url_for('courses_views.view_courses'))
     
+@course_views.route('/editNumStream/<course_id>', methods=['POST'])
+def update_num_streams(course_id):
+    numStreams = request.form['current_streams']
+    course = update_numStreams(course_id, numStreams)
+
+    return redirect (url_for('allocation_views.return_staff', course_id=course_id))
