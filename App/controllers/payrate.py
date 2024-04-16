@@ -1,4 +1,4 @@
-from App.models import PayRate
+from App.models import PayRate, TeachingStaff, Allocation
 from App.database import db
 from App.config import config
 
@@ -28,13 +28,22 @@ def update_payrate(id, staff_type, status, pay):
     return None  
 
 def get_pay_rate_for_staff(staff_type, status):
-    payrate = PayRates.query.filter_by(staff_type=staff_type, status=status).first()
+    payrate = PayRate.query.filter_by(staff_type=staff_type, status=status).first()
 
     if payrate:
-        return pay_rate_record.pay_rate
+        return payrate.pay
     return None
 
 def get_all_rates():
     all_pay_rates = PayRate.query.all()
 
     return all_pay_rates
+
+def calculate_cost(rate, num_streams):
+    return float(float(rate) * float(num_streams))
+
+def get_type_status(staff_type,status):
+    pay_rate = PayRate.query.filter_by(staff_type=staff_type, status=status).first()
+    if pay_rate:
+        return pay_rate
+    return None
