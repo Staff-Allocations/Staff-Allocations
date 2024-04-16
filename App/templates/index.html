@@ -9,7 +9,7 @@
   <style>
       tr[data-href]{cursor:pointer;}
       tr:hover {background-color: #D6EEEE;}
-      th {border-bottom: 1px solid}
+      th {border-bottom: 1px solid;}
       table {
           width: 100%;
           border: 2px solid;
@@ -19,10 +19,11 @@
       }
   </style>
 
-  <h1>Dashboard</h1>
-  {% if is_authenticated %}
-      <p>Welcome {{current_user.username}}</p>
-  {% endif %}
+<div style="display: flex; justify-content: space-between;">
+    <h1>Dashboard</h1>
+    <h5 style="text-align: right;">Total Cost for all streams: ${{totalcost}}</h5>
+</div>
+
 
   <div style="display: flex;">
       <div style="width: 30%; margin-right: 20px;">
@@ -39,7 +40,7 @@
           </table>
       </div>
       <div style="width: 70%;">
-          <h5>Available to Teach</h5>
+          <h5>Qualified to Teach</h5>
           <table>
               <tr>
                   <th>Staff Member</th>
@@ -71,19 +72,43 @@
       {% endfor %}
   </table>
   {% if rec_streams %}
-  <h5>Recommended Number of Streams</h5>
-  <table style = "width: 40%;">
-    <tr>
-      <th>Capacity</th>
-      <th>Recommended Number</th>
-    </tr>
-    <tr>
-      <td>{{sel_course.capacity}}</td>
-      <td>{{rec_streams}}</td>
-    </tr>
+  <div style="display: flex;">
+    <div style="width: 50%; margin-right: 10px;">
+      <h5>Recommended Number of Streams</h5>
+      <table style="width: 100%;">
+        <tr>
+          <th>Capacity</th>
+          <th>Recommended Number of Streams</th>
+          <th>Estimated Cost</th>
+        </tr>
+        <tr>
+          <td>{{sel_course.capacity}}</td>
+          <td>{{rec_streams}}</td>
+          <td>${{cost}}</td>
+        </tr>  
+      </table>
+    </div>
+    <div style="width: 50%;">
+        <h5>Current Number of Streams</h5>
+        <form method="POST" action="/editNumStream/{{sel_course.course_id}}">
+          <table style="width: 100%;">
+            <tr>
+              <th>Capacity</th>
+              <th>Current Number of Streams</th>
+              <th>Estimated Cost</th>
+            </tr>
+            <tr>
+              <td>{{sel_course.capacity}}</td>
+              <td>
+                <input type="number" name="current_streams" id="current_streams" value="{{sel_course.numStreams}}" style="width: 100%;" onchange="submitForm()">
+              </td>
+              <td>${{ cost2 }}</td>
+            </tr>  
+          </table>
+        </form>
+    </div>
+  </div>
   {% endif %}
-  </table>
-
 
   <div class="row">
       <div class="col-md-6">
@@ -93,9 +118,9 @@
           <form method="POST" action="/addStaffDetails" style="display: inline-block; padding-right: 10px;">
               <button class="btn waves-effect waves-light" type="submit" name="action">Add Staff Member</button>
           </form>
-          <form method="POST" action="/viewpayrates" style="display: inline-block;">
+          <!-- <form method="POST" action="/viewpayrates" style="display: inline-block;">
               <button class="btn waves-effect waves-light" type="submit" name="action">View Pay Rates</button>
-          </form>
+          </form> -->
       </div>
   </div>
 
@@ -104,6 +129,28 @@
           $(document.body).on("click", "tr[data-href]", function(){
               window.location.href = this.dataset.href;  
           });
+      });
+      function submitForm() {
+        document.forms[0].submit();
+        }
+
+        // Function to store the scroll position
+      function storeScrollPosition() {
+          sessionStorage.setItem('scrollPosition', window.scrollY);
+      }
+
+      // Function to restore the scroll position
+      function restoreScrollPosition() {
+          var scrollPosition = sessionStorage.getItem('scrollPosition');
+          if (scrollPosition) {
+              window.scrollTo(0, scrollPosition);
+              sessionStorage.removeItem('scrollPosition');
+          }
+      }
+      window.addEventListener('beforeunload', storeScrollPosition);
+
+      $(document).ready(function() {
+          restoreScrollPosition();
       });
   </script>
 {% endblock %}
