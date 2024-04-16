@@ -21,25 +21,13 @@ def get_course(course_id):
 def get_all_courses():
   return Courses.query.all()
 
-def get_students(course_id):
-    course = Courses.query.filter_by(course_id = course_id).first()
-    if (course):
-        return course.currStudents
-    return None
+def get_course_capacity(course_id):
+    course = Courses.query.filter_by(course_id=course_id).first()
+    if course:
+        return course.capacity
+    else:
+        return None
 
-def get_staff(course_id):
-    course = Courses.query.filter_by(course_id = course_id).first()
-    if (course):
-        return course.staffAssigned
-    return None
-'''
-def add_Staff(course_id, staff_id)
-    course = Courses.query.filter_by(course_id = course_id).first
-    if (course):
-        staffAssigned = staffAssigned 
-        return course.staffAssigned
-    return None
-'''
 def get_num_assessment(course_id):
     course = Courses.query.filter_by(course_id = course_id).first()
     if (course):
@@ -93,3 +81,30 @@ def calculate_lab_streams(course_id):
         
         return rec_streams
     return None
+
+def update_numStreams(course_id, numStreams):
+    course = get_course(course_id)
+
+    if course:
+        course.numStreams = numStreams
+       
+        db.session.commit()
+        return course
+    return None   
+
+def update_totalCost(course_id, cost):
+    course=get_course(course_id)
+    
+    if course:
+        course.totalCost=cost
+        db.session.commit()
+        return course
+    return None  
+    
+def calculate_total_cost():
+    total_cost = 0
+    courses = Courses.query.all()
+    for course in courses:
+        if course.totalCost is not None:
+            total_cost += course.totalCost
+    return total_cost
