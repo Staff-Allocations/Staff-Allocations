@@ -1,6 +1,7 @@
 from App.models import Courses, Allocation, TeachingStaff
 from App.database import db
 from App.config import config
+from sqlalchemy import or_
 import requests
 import json
 
@@ -50,3 +51,12 @@ def get_courses_for_staff(staff_id):
             courses.append(course)
 
     return courses
+
+from App.models import Allocation
+
+def get_staff_id_for_course_and_type(course_id, staff_type):
+    staff_ids = Allocation.query.filter_by(courseId=course_id).filter(or_(Allocation.type == 'Tutor', Allocation.type == 'Teaching Assistant')).with_entities(Allocation.staffId).all()
+
+    staff_ids = [id[0] for id in staff_ids]
+
+    return staff_ids
